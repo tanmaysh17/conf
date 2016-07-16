@@ -1,11 +1,11 @@
+### All libraries imported
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 import math
 import sys
-import runif
 
-
+### Setting default values for parameters
 fancy = False
 TRIALS = 500
 
@@ -14,7 +14,7 @@ if len(sys.argv) > 1:
     if len(sys.argv) > 2 and sys.argv[2] == '-fancy':
         fancy = True
 
-def sample(data):
+def sample(data):   ### Function for bootstrapping
 
     global TRIALS
     samplen = []
@@ -22,10 +22,10 @@ def sample(data):
     inside = []
 
     for i in range(0, TRIALS):
-        sample_indice = runif01(0, len(data))
+        samplen = []
         for j in range(0, len(data)):
-            samplen.append(data[sample_indice[j]])
-
+            sample_indice = np.random.randint(0, len(data))
+            samplen.append(data[sample_indice])
         X_.append(np.mean(samplen))
 
     X_ = sorted(X_)
@@ -86,7 +86,6 @@ plt.axis([1.10, 1.201, 0, 30])
 x = np.arange(1.05, 1.25, 0.001)
 y = stats.norm.pdf(x, np.mean(prices), np.std(prices)/pow(len(prices), 0.5))
 plt.plot(x, y, color = 'red')
-
 plt.plot(inside[0], 0, 'g^', inside[-1], 0, 'g^')
 
 mean = np.mean(prices)
