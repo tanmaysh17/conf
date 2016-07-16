@@ -8,13 +8,9 @@ def setseed(s):
     x = s
 
 
-def runif01(start, stop):
+def runif01(start, stop, seed):
+    setseed(seed)
     global x
     x = a * x % m
-    return start + (stop-start)*(x / float(m))
+    return int(start + (stop-start)*(x / float(m)))
 
-setseed(99)
-print runif01(10, 20)
-print runif01(10, 20)
-print runif01(10, 20)
-print runif01(10, 20)
