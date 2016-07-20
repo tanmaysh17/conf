@@ -6,7 +6,7 @@ import math
 import sys
 
 ### Setting default values for parameters
-fancy = False
+fancy = True
 TRIALS = 500
 
 if len(sys.argv) > 1:
@@ -24,7 +24,7 @@ def sample(data):   ### Function for bootstrapping
     for i in range(0, TRIALS):
         samplen = []
         for j in range(0, len(data)):
-            sample_indice = np.random.randint(0, len(data))
+            sample_indice = np.random.randint(0, len(data)-1)
             samplen.append(data[sample_indice])
         X_.append(np.mean(samplen))
 
@@ -85,7 +85,7 @@ if fancy == True:
 plt.axis([1.10, 1.201, 0, 30])
 x = np.arange(1.05, 1.25, 0.001)
 y = stats.norm.pdf(x, np.mean(prices), np.std(prices)/pow(len(prices), 0.5))
-plt.plot(x, y, color = 'red')
+plt.plot(x, y, color='red')
 plt.plot(inside[0], 0, 'g^', inside[-1], 0, 'g^')
 
 mean = np.mean(prices)
